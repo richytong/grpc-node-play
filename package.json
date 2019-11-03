@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@grpc/proto-loader": "^0.5.2",
+    "fnal": "^0.1.1",
     "grpc": "^1.24.2",
+    "make-proto-app": "^0.1.0",
     "uuid": "^3.3.3"
   }
 }

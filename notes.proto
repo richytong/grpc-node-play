@@ -2,7 +2,10 @@ syntax = "proto3";
 
 service NoteService {
   rpc List (Empty) returns (NoteList);
+  rpc ListStream (Empty) returns (stream Note);
   rpc Insert (Note) returns (Note);
+  rpc InsertStream (stream Note) returns (NoteList);
+  rpc PassAround (stream Note) returns (stream Note);
 }
 
 message Empty {}

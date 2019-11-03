@@ -1,18 +1,21 @@
+const _ = require('fnal')
 const grpc = require('grpc')
 const protoLoader = require('@grpc/proto-loader')
+const uuidv4 = require('uuid/v4')
 
-const PROTO_PATH = './notes.proto'
+const loadProto = _.syncFlow(protoLoader.loadSync, grpc.loadPackageDefinition)
 
-const loadProto = x => grpc.loadPackageDefinition(protoLoader.loadSync(x))
-
-const proto = loadProto(PROTO_PATH)
-
-const host = 'localhost'
-const port = '50051'
-
-const client = new proto.NoteService(
-  `${host}:${port}`,
-  grpc.credentials.createInsecure(),
+const makeClient = _.syncFlow(
+  x => ({ ...x, proto: loadProto(x.protopath) }),
+  x => new x.proto[x.service](
+    `${x.host || 'localhost'}:${x.port || 3000}`,
+    x.credentials || grpc.credentials.createInsecure(),
+  ),
 )
 
-module.exports = client
+module.exports = makeClient({
+  host: 'localhost',
+  port: 3000,
+  protopath: 'notes.proto',
+  service: 'NoteService',
+})
