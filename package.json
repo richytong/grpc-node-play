@@ -1,0 +1,17 @@
+{
+  "name": "grpc-node-play",
+  "version": "0.1.0",
+  "description": "gRPC-node play",
+  "author": "Richard Tong",
+  "license": "UNLICENSED",
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "github:richytong/grpc-node-play"
+  },
+  "dependencies": {
+    "@grpc/proto-loader": "^0.5.2",
+    "grpc": "^1.24.2",
+    "uuid": "^3.3.3"
+  }
+}
